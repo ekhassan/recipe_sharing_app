@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("./assets/fonts/SpaceGrotesk.ttf") format("truetype");
+  font-style: normal;
+}
+
+html {
+  background-color: #fdfaf5;
+  scroll-behavior: smooth;
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+::selection {
+  color: #fdfaf5;
+  background-color: #ec4700;
+}
+
+/* Scroll bar */
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ec4700;
+  border-radius: 6px;
+  border: 300px solid transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ec4700;
+}
+
+.overflow-x-auto::-webkit-scrollbar,
+.overflow-y-auto::-webkit-scrollbar,
+.ck-content::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* Text Editor Styling */
+
+/* custom.css */
+.ck-content {
+  @apply !px-6 !rounded-3xl !border-2 !border-gray-300 focus:!ring-[#ec4700] focus:!border-[#ec4700] !outline-none;
+}
+.ck-toolbar-container {
+  @apply !rounded-3xl;
+}
+.ck-toolbar {
+  @apply !rounded-3xl;
+}
+.ck-on {
+  @apply !bg-[#ec4700]/10 focus:!border-none focus:!outline-none focus:!shadow-lg focus:!shadow-[#ec4700]/10 !rounded-3xl;
+}
+.ck-off {
+  @apply focus:!bg-[#ec4700]/10 focus:!border-none focus:!outline-none focus:!shadow-lg focus:!shadow-[#ec4700]/10 !rounded-3xl;
+}
+.ck-button {
+  @apply focus:!shadow-lg focus:!shadow-[#ec4700]/10;
+}
+.ck-powered-by {
+  @apply hidden;
+}
+.ck-icon {
+  @apply !text-[#ec4700];
+}
+.ck-balloon-panel {
+  @apply !rounded-3xl !bg-[#fdfaf5];
+}
+.ck-input {
+  @apply focus:!border-none focus:!outline-none focus:!shadow-lg  focus:!border-[#ec4700] focus:!ring-[#ec4700] focus:!shadow-[#ec4700]/10 !rounded-3xl;
+}
+.ck-label {
+  @apply !font-bold;
+}
