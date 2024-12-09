@@ -23,6 +23,11 @@ app.use(cors({
 app.use(cookieParser());
 app.use(morgan('dev'));
 
+// Test Route
+app.get("/", (req, res) => {
+    res.send("Hello World");
+})
+
 // Routes
 app.use('/api/auth', authRoutes);
 
