@@ -43,7 +43,7 @@ const Navbar = () => {
                             />
                         </div>}
                         arrowIcon={false}
-                        className="bg-[#fdfaf5] font-medium shadow-2xl rounded-3xl"
+                        className="bg-[#fdfaf5] font-medium shadow-2xl rounded-3xl "
                         inline
                     >
                         <Dropdown.Header>
@@ -54,7 +54,9 @@ const Navbar = () => {
                         <Dropdown.Item>Settings</Dropdown.Item>
                         <Dropdown.Item>Earnings</Dropdown.Item>
                         <Dropdown.Divider />
-                        <Dropdown.Item>Sign out</Dropdown.Item>
+                        <Dropdown.Item className="focus:rounded-b-3xl hover:rounded-b-3xl" as={Link} to={'/signout'}>Sign out</Dropdown.Item>
+                        <Dropdown.Item className="focus:rounded-b-3xl hover:rounded-b-3xl" as={Link} to={'/signin'}>Sign in</Dropdown.Item>
+                        <Dropdown.Item className="focus:rounded-b-3xl hover:rounded-b-3xl" as={Link} to={'/signup'}>Sign up</Dropdown.Item>
                     </Dropdown>
 
                     {/* Mobile Menu Button */}
