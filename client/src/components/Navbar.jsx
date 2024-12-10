@@ -41,7 +41,7 @@ const Navbar = () => {
                         </div>
                     </Link>
                     <div className="hidden font-medium md:flex items-center gap-10">
-                        <Link to={'/'}>Recipe</Link>
+                        <Link to={'/recipe'}>Recipe</Link>
                         <Link to={'/'}>Categories</Link>
                         <Link to={'/'}>Favorites</Link>
                         <Link to={'/'}>Lists</Link>
@@ -111,7 +111,7 @@ const Navbar = () => {
             <div
                 className={`md:hidden flex flex-col items-start px-12 py-2 transition-all duration-500 ease-in-out font-medium ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
             >
-                <Link to={'/'} className="py-2">Recipe</Link>
+                <Link to={'/recipe'} className="py-2">Recipe</Link>
                 <Link to={'/'} className="py-2">Categories</Link>
                 <Link to={'/'} className="py-2">Favorites</Link>
                 <Link to={'/'} className="py-2">Lists</Link>

@@ -17,7 +17,7 @@ connectDB();
 
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:5173","http://192.168.10.3:5173"],  
+    origin: ["http://localhost:5173", "http://192.168.10.3:5173", "https://freshlyy.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true
 
