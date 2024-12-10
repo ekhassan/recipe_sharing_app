@@ -6,9 +6,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { signin } from "../api/auth/AuthApi";
 import TextInput from "../components/TextInput";
 
+import useAuthStore from "../store/useAuthStore"
+
 const Signin = () => {
 
     const navigate = useNavigate();
+    const { login } = useAuthStore();
 
     const mutation = useMutation({
         mutationFn: ({ email, password }) => toast.promise(signin(email, password), {
@@ -18,6 +21,7 @@ const Signin = () => {
         }),
         onSuccess: (data) => {
             console.log(data);
+            login(data.token);
             navigate('/');
         }
     });

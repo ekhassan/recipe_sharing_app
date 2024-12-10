@@ -10,14 +10,16 @@ const cookieParser = require('cookie-parser');
 const connectDB = require("./db/db");
 
 const authRoutes = require("./routes/auth.route");
+const recipeRoutes = require("./routes/recipe.route");
 
 
 connectDB();
 
 app.use(express.json());
 app.use(cors({
-    origin: ["*"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["http://localhost:5173","http://192.168.10.3:5173"],  
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    credentials: true
 
 }))
 app.use(cookieParser());
@@ -30,6 +32,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/recipe', recipeRoutes)
 
 const Port = process.env.PORT || 5000;
 

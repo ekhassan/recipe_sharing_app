@@ -19,7 +19,7 @@ const userValidationRules = () => {
 const recipeValidationRules = () => {
     return [
         body("title").notEmpty().withMessage("Title is required"),
-        body("ingredients").isArray({ min: 1 }).notEmpty().withMessage("Ingredients are required"),
+        body("ingredients").notEmpty().withMessage("Ingredients are required"),
         body("instructions").notEmpty().withMessage("Instructions are required"),
         body("category").notEmpty().withMessage("Category is required"),
     ]

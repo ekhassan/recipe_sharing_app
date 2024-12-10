@@ -2,10 +2,28 @@
 import { useFormik } from "formik";
 import TextInput from "../components/TextInput";
 import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { useMutation } from "@tanstack/react-query"
+import { signup } from "../api/auth/AuthApi"
+import uploadCare from "../api/uploadCare/uploadImage"
 
 const Signup = () => {
+
+  const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: ({ username, email, password, displayPicture }) =>
+      toast.promise(signup(username, email, password, displayPicture), {
+        loading: 'Loading...',
+        success: 'Sign up successfully',
+        error: (err) => (err.response?.data?.message || err.message),
+      }),
+    onSuccess: (data) => {
+      console.log(data);
+      navigate('/');
+    }
+  });
   const formik = useFormik({
     initialValues: {
       displayPicture: null,
@@ -27,47 +45,29 @@ const Signup = () => {
         return;
       }
 
-      // Upload image to Cloudinary
       try {
-        const uploadResult = await uploadImageToCloudinary(values.displayPicture);
-        console.log("Uploaded Image URL:", uploadResult.secure_url);
+        // Upload the image file
+        const fileData = await uploadCare.uploadFile(values.displayPicture);
+        const imageUrl = fileData.cdnUrl;
 
-        // Handle form submission here (e.g., send user data to your API)
-        console.log({
-          ...values,
-          displayPicture: uploadResult.secure_url, // Include the uploaded image URL
+        await mutation.mutateAsync({
+          username: values.username,
+          email: values.email,
+          password: values.password,
+          displayPicture: imageUrl,
         });
       } catch (error) {
-        toast.error("Image upload failed", error);
+        toast.error("Image upload failed");
+        console.error(error);
       }
     },
   });
 
   const handleDisplayPicture = (event) => {
     const file = event.target.files[0];
-    console.log(file);
+    console.log(file.name);
 
     formik.setFieldValue("displayPicture", file);
-  };
-
-  const uploadImageToCloudinary = async (file) => {
-    const url = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME}/image/upload`;
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", import.meta.env.VITE_APP_CLOUDINARY_UPLOAD_PRESET);
-    formData.append("cloud_name", import.meta.env.VITE_APP_CLOUDINARY_CLOUD_NAME);
-
-    const response = await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error("Image upload failed");
-    }
-
-    return await response.json();
   };
 
   return (
@@ -88,7 +88,7 @@ const Signup = () => {
               onBlur={formik.handleBlur} // Add this line for handling blur events
             />
             {formik.touched.displayPicture && !formik.values.displayPicture ? (
-              <div className="text-red-500">Image is required</div>
+              <div className="text-red-500 text-xs">Image is required</div>
             ) : null}
           </div>
 
@@ -104,7 +104,7 @@ const Signup = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.name && !formik.values.name ? (
-              <div className="text-red-500">Full Name is required</div>
+              <div className="text-red-500 text-xs">Full Name is required</div>
             ) : null}
           </div>
 
@@ -120,7 +120,7 @@ const Signup = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.username && !formik.values.username ? (
-              <div className="text-red-500">Username is required</div>
+              <div className="text-red-500 text-xs">Username is required</div>
             ) : null}
           </div>
 
@@ -136,7 +136,7 @@ const Signup = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.email && !formik.values.email ? (
-              <div className="text-red-500">Email is required</div>
+              <div className="text-red-500 text-xs">Email is required</div>
             ) : null}
           </div>
 
@@ -151,7 +151,7 @@ const Signup = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.password && !formik.values.password ? (
-              <div className="text-red-500">Password is required</div>
+              <div className="text-red-500 text-xs">Password is required</div>
             ) : null}
           </div>
 
@@ -166,7 +166,7 @@ const Signup = () => {
               onBlur={formik.handleBlur}
             />
             {formik.touched.confirmPassword && !formik.values.confirmPassword ? (
-              <div className="text-red-500">Confirm Password is required</div>
+              <div className="text-red-500 text-xs">Confirm Password is required</div>
             ) : null}
           </div>
 

@@ -13,18 +13,15 @@ const recipeSchema = new mongoose.Schema({
         trim: true,
     },
     ingredients: {
-        type: [String],
+        type: String,
         required: true,
     },
     instructions: {
         type: String,
         required: true,
     },
-    videoUrl: {
-        type: String, // URL to a cooking video
-    },
-    category: {
-        type: String, // e.g., 'Dessert', 'Main Course', etc.
+    tags: {
+        type: [String],
         required: true,
     },
     userId: {

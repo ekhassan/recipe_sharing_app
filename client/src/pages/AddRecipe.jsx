@@ -16,6 +16,8 @@ const AddRecipe = () => {
                 <div className="my-10 ">
                     <h1 className="text-3xl font-medium mb-10 text-center">Add Recipe</h1>
                     <form >
+                        <h2 className="text-xl font-bold">Recipe Title</h2>
+                        <TextInput name={'title'} type={"text"} placeholder={"Title of the Recipe"} />
                         <h2 className="text-xl font-bold">Dish Picture</h2>
                         <TextInput name={'img'} type={"file"} />
 
