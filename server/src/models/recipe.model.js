@@ -12,11 +12,18 @@ const recipeSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
+    notes: {
+        type: String,
+    },
+    details: {
+        type: String,
+        required: true,
+    },
     ingredients: {
         type: String,
         required: true,
     },
-    instructions: {
+    directions: {
         type: String,
         required: true,
     },

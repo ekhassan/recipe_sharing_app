@@ -31,8 +31,8 @@ const Navbar = () => {
     }, [isAuthenticated]);
 
     return (
-        <header className="transition-all duration-500">
-            <div className="flex items-center justify-between mx-5 sm:mx-32 py-5  transition-all duration-500">
+        <header className="transition-all duration-500 fixed w-full backdrop-blur-md z-10">
+            <div className="flex items-center justify-between mx-5 sm:mx-32 py-5 transition-all duration-500">
                 <div className="flex items-center justify-between gap-4 md:gap-14">
                     <Link to={'/'}>
                         <div className="flex items-center">

@@ -2,14 +2,14 @@ const Recipe = require("../models/recipe.model");
 
 
 const getAllRecipes = async (req, res) => {
-    const { page = 1, limit = 10 } = req.query; 
+    const { page = 1, limit = 10 } = req.query;
 
     try {
         const recipes = await Recipe.find()
-            .skip((page - 1) * limit) 
+            .skip((page - 1) * limit)
             .limit(Number(limit));
 
-        const totalRecipes = await Recipe.countDocuments(); 
+        const totalRecipes = await Recipe.countDocuments();
 
         return res.status(200).json({
             message: "Recipe fetched successfully",
@@ -27,9 +27,9 @@ const getAllRecipes = async (req, res) => {
 const addRecipe = async (req, res) => {
     try {
         const userId = req.userId
-        const { image, videoUrl, title, ingredients, instructions, tags, ratings } = req.body;
+        const { image, videoUrl, title, notes, details, ingredients, directions, tags, ratings } = req.body;
 
-        const recipe = await Recipe.create({ image, videoUrl, title, ingredients, instructions, tags, ratings, userId });
+        const recipe = await Recipe.create({ image, videoUrl, title, ingredients, details, notes, directions, tags, ratings, userId });
 
         return res.status(201).json({ message: "Recipe Created Successfully", recipe })
 

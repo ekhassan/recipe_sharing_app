@@ -20,8 +20,8 @@ const recipeValidationRules = () => {
     return [
         body("title").notEmpty().withMessage("Title is required"),
         body("ingredients").notEmpty().withMessage("Ingredients are required"),
-        body("instructions").notEmpty().withMessage("Instructions are required"),
-        body("category").notEmpty().withMessage("Category is required"),
+        body("details").notEmpty().withMessage("Details are required"),
+        body("directions").notEmpty().withMessage("Directions are required"),
     ]
 }
 

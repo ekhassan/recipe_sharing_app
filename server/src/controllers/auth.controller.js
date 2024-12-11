@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const signUp = async (req, res) => {
 
-    const { username, email, password, displayPicture } = req.body;
+    const { name, username, email, password, displayPicture } = req.body;
 
     try {
 
@@ -15,7 +15,7 @@ const signUp = async (req, res) => {
             const salt = await bcrypt.genSalt(10);
             const hashPassword = await bcrypt.hash(password, salt);
 
-            const user = await User.create({ username, email, password: hashPassword, displayPicture });
+            const user = await User.create({ name, username, email, password: hashPassword, displayPicture });
 
             return res.status(201).json({ message: "User created successfully", user });
         }
@@ -78,8 +78,27 @@ const getProfile = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    try {
+
+        const { id } = req.params
+
+        const user = await User.findById(id).select('-password');
+
+        if (!user) {
+            return res.status(404).json({ message: "User with this id Not Found", id })
+        }
+
+        return res.json({ message: "Successfully fetched user", user })
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 module.exports = {
     signUp,
     signIn,
     getProfile,
+    getUser
 }

@@ -43,7 +43,7 @@ const EditRecipe = () => {
     return (
         <>
             <main className="mx-5 sm:mx-32">
-                <div className="my-10 ">
+                <div className="py-24">
                     <h1 className="text-3xl font-medium mb-10 text-center">Edit Recipe</h1>
                     <form onSubmit={handleSubmit}>
                         <h2 className="text-xl font-bold">Dish Picture</h2>

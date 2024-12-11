@@ -19,7 +19,7 @@ const Welcome = () => {
         <>
             <main className="mx-5 sm:mx-32 min-h-screen">
 
-                <section className="py-10" id="popular_recipe">
+                <section className="py-24" id="popular_recipe">
 
                     <h2 className="text-2xl font-medium">Popular Recipes</h2>
 

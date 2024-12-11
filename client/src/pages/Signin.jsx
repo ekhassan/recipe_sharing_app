@@ -38,7 +38,7 @@ const Signin = () => {
 
     return (
         <main className="mx-5 sm:mx-32">
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-screen">
                 <form className="font-medium" onSubmit={formik.handleSubmit}>
                     <div className="my-12">
                         <h1 className="text-3xl font-medium text-center">Sign In</h1>
