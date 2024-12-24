@@ -43,7 +43,7 @@ const getRecipe = async (req, res) => {
     try {
         const { id } = req.params
 
-        const recipe = await Recipe.findById(id);
+        const recipe = await Recipe.findById(id).populate('userId', "username displayPicture");
 
         if (!recipe) {
             return res.status(404).json({ message: "No Recipe Found" })

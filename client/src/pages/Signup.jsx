@@ -1,4 +1,3 @@
-
 import { useFormik } from "formik";
 import TextInput from "../components/TextInput";
 import { Button } from "flowbite-react";
@@ -24,6 +23,31 @@ const Signup = () => {
       navigate('/signin');
     }
   });
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = 'Username is required';
+    } else if (!/^[a-z0-9_]+$/.test(values.username)) {
+      errors.username = 'Username can only contain lowercase letters, numbers and underscores';
+    }
+    if (!values.name) {
+      errors.name = 'Full Name is required';
+    }
+    if (!values.email) {
+      errors.email = 'Email is required';
+    }
+    if (!values.password) {
+      errors.password = 'Password is required';
+    }
+    if (!values.confirmPassword) {
+      errors.confirmPassword = 'Confirm Password is required';
+    } else if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
+    }
+    return errors;
+  };
+
   const formik = useFormik({
     initialValues: {
       displayPicture: null,
@@ -33,20 +57,15 @@ const Signup = () => {
       password: "",
       confirmPassword: "",
     },
+    validate,
     onSubmit: async (values) => {
-      if (values.password !== values.confirmPassword) {
-        toast.error("Passwords do not match");
-        return;
-      }
-
-      // Check if image is uploaded
       if (!values.displayPicture) {
         toast.error("Image is required");
         return;
       }
 
       try {
-        // Upload the image file
+
         const fileData = await uploadCare.uploadFile(values.displayPicture);
         const imageUrl = fileData.cdnUrl;
 
@@ -99,13 +118,13 @@ const Signup = () => {
                 type={"text"}
                 name={"name"}
                 label={"Full Name"}
-                placeholder={""}
+                placeholder={"e.g. Jhon Doe"}
                 value={formik.values.name}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.name && !formik.values.name ? (
-                <div className="text-red-500 text-xs">Full Name is required</div>
+              {formik.touched.name && formik.errors.name ? (
+                <div className="text-red-500 text-xs">{formik.errors.name}</div>
               ) : null}
             </div>
 
@@ -115,13 +134,13 @@ const Signup = () => {
                 type={"text"}
                 name={"username"}
                 label={"Username"}
-                placeholder={""}
+                placeholder={"e.g. johndoe"}
                 value={formik.values.username}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.username && !formik.values.username ? (
-                <div className="text-red-500 text-xs">Username is required</div>
+              {formik.touched.username && formik.errors.username ? (
+                <div className="text-red-500 text-xs">{formik.errors.username}</div>
               ) : null}
             </div>
 
@@ -131,13 +150,13 @@ const Signup = () => {
                 type={"email"}
                 name={"email"}
                 label={"Email"}
-                placeholder={""}
+                placeholder={"e.g. jhondoe@example.com"}
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.email && !formik.values.email ? (
-                <div className="text-red-500 text-xs">Email is required</div>
+              {formik.touched.email && formik.errors.email ? (
+                <div className="text-red-500 text-xs">{formik.errors.email}</div>
               ) : null}
             </div>
 
@@ -147,12 +166,13 @@ const Signup = () => {
                 type={"password"}
                 name={"password"}
                 label={"Password"}
+                placeholder={"password"}
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.password && !formik.values.password ? (
-                <div className="text-red-500 text-xs">Password is required</div>
+              {formik.touched.password && formik.errors.password ? (
+                <div className="text-red-500 text-xs">{formik.errors.password}</div>
               ) : null}
             </div>
 
@@ -162,12 +182,13 @@ const Signup = () => {
                 type={"password"}
                 name={"confirmPassword"}
                 label={"Confirm Password"}
+                placeholder={"Confirm Password"}
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.confirmPassword && !formik.values.confirmPassword ? (
-                <div className="text-red-500 text-xs">Confirm Password is required</div>
+              {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
+                <div className="text-red-500 text-xs">{formik.errors.confirmPassword}</div>
               ) : null}
             </div>
 

@@ -20,7 +20,6 @@ const Signin = () => {
             error: (err) => (err.response?.data?.message || err.message),
         }),
         onSuccess: (data) => {
-            console.log(data);
             login(data.token);
             navigate('/');
         }

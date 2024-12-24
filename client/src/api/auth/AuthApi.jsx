@@ -16,7 +16,7 @@ export const getUser = async () => {
     return response.data;
 }
 
-export const getProfile = async (id) => {
-    const response = await api.get(`/auth/user/${id}`);
+export const getProfile = async (username) => {
+    const response = await api.get(`/auth/${username}`);
     return response.data;
 }

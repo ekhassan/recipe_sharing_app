@@ -9,8 +9,9 @@ import { getUser } from "../api/auth/AuthApi";
 const Navbar = () => {
     const { logout, isAuthenticated } = useAuthStore();
     const [user, setUser] = useState(null);
-
     const [isOpen, setIsOpen] = useState(false);
+
+
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -23,6 +24,7 @@ const Navbar = () => {
                     const userData = await getUser();
                     setUser(userData.user);
                 } catch (error) {
+                    localStorage.clear("auth-storage");
                     console.error('Error fetching user data:', error);
                 }
             }
@@ -31,8 +33,8 @@ const Navbar = () => {
     }, [isAuthenticated]);
 
     return (
-        <header className="transition-all duration-500 fixed w-full backdrop-blur-md z-10">
-            <div className="flex items-center justify-between mx-5 sm:mx-32 py-5 transition-all duration-500">
+        <header className="transition-all duration-500 fixed w-full backdrop-blur-3xl z-10">
+            <div className="flex items-center justify-between mx-5 sm:mx-32 py-3 md:py-5 transition-all duration-500">
                 <div className="flex items-center justify-between gap-4 md:gap-14">
                     <Link to={'/'}>
                         <div className="flex items-center">
@@ -74,7 +76,7 @@ const Navbar = () => {
                                     <span className="block text-lg font-bold">{user?.username || 'Guest'}</span>
                                     <span className="block truncate text-sm font-black">{user?.email || 'No Email'}</span>
                                 </Dropdown.Header>
-                                <Dropdown.Item as={Link} to="/dashboard">Dashboard</Dropdown.Item>
+                                <Dropdown.Item as={Link} to={`/${user?.username}`}>Dashboard</Dropdown.Item>
                                 <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
                                 <Dropdown.Item as={Link} to="/earnings">Earnings</Dropdown.Item>
                                 <Dropdown.Divider />
@@ -109,7 +111,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             <div
-                className={`md:hidden flex flex-col items-start px-12 py-2 transition-all duration-500 ease-in-out font-medium ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
+                className={`md:hidden flex flex-col items-start px-12 py-2 transition-all duration-500 ease-in-out font-medium ${isOpen ? 'max-h-screen opacity-100 text-[#ec4700]' : 'max-h-0 opacity-0 overflow-hidden'}`}
             >
                 <Link to={'/recipe'} className="py-2">Recipe</Link>
                 <Link to={'/'} className="py-2">Categories</Link>

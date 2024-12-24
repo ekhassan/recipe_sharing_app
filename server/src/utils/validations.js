@@ -5,6 +5,7 @@ const userValidationRules = () => {
     return [
         body("username").isLength({ min: 3 })
             .withMessage("Username must be at least 3 characters long")
+            .matches(/^[a-z0-9_]+$/).withMessage("Username must only contain letters, numbers, hyphens, and underscores")
             .notEmpty().withMessage("Username is required"),
         body("email").isEmail()
             .withMessage("Must be a valid email address")

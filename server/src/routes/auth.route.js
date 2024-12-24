@@ -7,7 +7,7 @@ const {
     userValidationRules,
 } = require("../utils/validations")
 
-const { signIn, signUp, getProfile, getUser } = require("../controllers/auth.controller")
+const { signIn, signUp, getProfile, getProfileWithRecipes } = require("../controllers/auth.controller")
 
 
 
@@ -16,7 +16,9 @@ router.post('/signup', userValidationRules(), validateUser, signUp);
 
 router.get('/profile', authMiddleware, getProfile);
 
-router.get('/user/:id', getUser);
+router.get('/:username', authMiddleware, getProfileWithRecipes)
+
+
 
 
 module.exports = router

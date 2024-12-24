@@ -38,13 +38,13 @@ const RecipeDetail = ({ img, name, tags, notes, details, ingredients, directions
             <div>
                 <div className="py-10">
                     <h1 className="text-4xl font-medium mb-3">{name}</h1>
-                    <div className="flex gap-1 mt-3">
+                    <div className="flex flex-wrap gap-1 mt-3">
                         {tags && tags.map((tag) => (
                             <span key={tag} className="px-2 py-1 bg-slate-400/30 text-xs rounded-full font-medium">{tag}</span>
                         ))}
                     </div>
                     <div className="bg-orange-500 w-full h-[26.75rem] my-5 rounded-3xl overflow-hidden">
-                        <img src={img ? img : "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"} alt={name} className="w-full h-full object-cover" />
+                        <img src={img ? img : "https://worldfoodtour.co.uk/wp-content/uploads/2013/06/neptune-placeholder-48-300x300.jpg"} alt={name} className="w-full h-full object-cover" />
                     </div>
                     {/* Profile section */}
                     <div className="flex items-center justify-between my-5">

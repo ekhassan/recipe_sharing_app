@@ -5,10 +5,15 @@ import { InlineEditor, Bold, Essentials, Italic, Link, List, Paragraph, Undo } f
 
 import 'ckeditor5/ckeditor5.css';
 
-const Editor = ({ placeholder, onChange }) => {
+const Editor = ({ name, placeholder, value, onChange, onBlur }) => {
+    const handleEditorChange = (event, editor) => {
+        const data = editor.getData();
+        onChange({ target: { name, value: data } });
+    };
     return (
         <CKEditor
             className='rounded-full'
+            id={name}
             editor={InlineEditor}
             config={{
                 toolbar: {
@@ -37,10 +42,9 @@ const Editor = ({ placeholder, onChange }) => {
                 ],
                 placeholder: placeholder,
             }}
-            onChange={(event, editor) => {
-                const data = editor.getData();
-                onChange(data);
-            }}
+            data={value}
+            onChange={handleEditorChange}
+            onBlur={onBlur}
         />
     );
 }

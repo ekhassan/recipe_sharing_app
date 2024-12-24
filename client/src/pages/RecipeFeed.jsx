@@ -23,10 +23,12 @@ const RecipeFeed = () => {
 
     // Update recipes when new data is fetched
     useEffect(() => {
+        console.log(data);
+
         if (data && data.recipes) {
             setRecipes((prevRecipes) => [...prevRecipes, ...data.recipes]);
             if (data.recipes.length < 10) {
-                setHasMore(false); // No more recipes to load
+                setHasMore(false);
             }
         }
     }, [data]);

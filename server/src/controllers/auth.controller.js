@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const Recipe = require("../models/recipe.model")
 const bcrypt = require('bcryptjs');
 
 const signUp = async (req, res) => {
@@ -78,21 +79,21 @@ const getProfile = async (req, res) => {
     }
 }
 
-const getUser = async (req, res) => {
+const getProfileWithRecipes = async (req, res) => {
     try {
 
-        const { id } = req.params
+        const { username } = req.params
 
-        const user = await User.findById(id).select('-password');
-
+        const user = await User.findOne({ username }).select('-password');
+        const recipes = await Recipe.find({ userId: req.userId });
         if (!user) {
-            return res.status(404).json({ message: "User with this id Not Found", id })
+            return res.status(404).json({ message: "User not found" });
         }
 
-        return res.json({ message: "Successfully fetched user", user })
+        return res.status(200).json({ message: "User found", user, recipes });
     } catch (err) {
-        console.error(err);
-        return res.status(500).json({ message: "Internal server error" });
+        console.log(err)
+        return res.status(500).json({ message: "Internal server error", err });
     }
 }
 
@@ -100,5 +101,5 @@ module.exports = {
     signUp,
     signIn,
     getProfile,
-    getUser
+    getProfileWithRecipes
 }

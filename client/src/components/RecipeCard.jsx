@@ -2,13 +2,14 @@
 import { Card, Rating } from "flowbite-react";
 import { Link } from "react-router-dom";
 
-const RecipeCard = ({ _id, title, imageUrl }) => {
+const RecipeCard = ({ _id, title, image }) => {
+    console.log(image)
     return (
         <div>
             <Link to={`/detail/${_id}`} >
                 <Card className="rounded-3xl bg-[#fdfaf5] overflow-hidden "
                     imgAlt="Recipe Image"
-                    imgSrc={imageUrl}
+                    imgSrc={image ? image : "https://worldfoodtour.co.uk/wp-content/uploads/2013/06/neptune-placeholder-48-300x300.jpg"}
                 >
                     <h3>{title}</h3>
 
