@@ -1,9 +1,10 @@
 import { Heart, MessageCircleMore, Zap } from "lucide-react"
+import { Link } from "react-router-dom"
 
 
 
 // eslint-disable-next-line react/prop-types
-const PopularRecipeCard = ({ img, name, tags, likes, comments, tops }) => {
+const PopularRecipeCard = ({ id, img, name, tags, likes, comments, tops }) => {
 
     return (
         <div className="snap-start" >
@@ -26,7 +27,9 @@ const PopularRecipeCard = ({ img, name, tags, likes, comments, tops }) => {
                         </span>
                     </div>
                     <div className="absolute bottom-0 py-5 text-white">
-                        <h3 className="text-xl font-medium">{name}</h3>
+                        <Link to={`/detail/${id}`}>
+                            <h3 className="text-xl font-medium">{name}</h3>
+                        </Link>
                         <div className="flex gap-1 mt-3">
                             {/* eslint-disable-next-line react/prop-types */}
                             {tags && tags.map((tag) => (

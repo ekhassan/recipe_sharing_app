@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
-import TextInput from "../components/TextInput";
 import { Button } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query"
+import TextInput from "../components/TextInput";
 import { signup } from "../api/auth/AuthApi"
 import uploadCare from "../api/uploadCare/uploadImage"
 
@@ -12,12 +12,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const mutation = useMutation({
-    mutationFn: ({ username, email, password, displayPicture }) =>
-      toast.promise(signup(username, email, password, displayPicture), {
-        loading: 'Loading...',
-        success: 'Sign up successfully',
-        error: (err) => (err.response?.data?.message || err.message),
-      }),
+    mutationFn: ({ name, username, email, password, displayPicture }) => signup(name, username, email, password, displayPicture),
     onSuccess: (data) => {
       console.log(data);
       navigate('/signin');
@@ -69,12 +64,17 @@ const Signup = () => {
         const fileData = await uploadCare.uploadFile(values.displayPicture);
         const imageUrl = fileData.cdnUrl;
 
-        await mutation.mutateAsync({
+        toast.promise(mutation.mutateAsync({
           username: values.username,
           email: values.email,
           password: values.password,
           displayPicture: imageUrl,
-        });
+        }), {
+          loading: 'Loading...',
+          success: 'Sign up successfully',
+          error: (err) => (err.response?.data?.message || err.message),
+        })
+
       } catch (error) {
         toast.error("Image upload failed");
         console.error(error);
@@ -88,6 +88,9 @@ const Signup = () => {
 
     formik.setFieldValue("displayPicture", file);
   };
+
+  console.log(formik.values)
+  console.log(mutation)
 
   return (
     <main className="mx-5 sm:mx-32">

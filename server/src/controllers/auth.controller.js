@@ -79,13 +79,30 @@ const getProfile = async (req, res) => {
     }
 }
 
+const updateProfile = async (req, res) => {
+    try {
+        const { name, displayPicture } = req.body;
+        if (!name || !displayPicture) {
+            return res.status(500).json({ message: "Name and Display Picture are required,To Update Profile" });
+        }
+        const user = await User.findByIdAndUpdate(req.userId, { name, displayPicture }, { new: true }).select('-password');
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        return res.status(200).json({ message: "User updated", user });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error", err });
+    }
+}
+
 const getProfileWithRecipes = async (req, res) => {
     try {
 
         const { username } = req.params
 
         const user = await User.findOne({ username }).select('-password');
-        const recipes = await Recipe.find({ userId: req.userId });
+        const recipes = await Recipe.find({ userId: user._id }).sort({ createdAt: -1 });
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
@@ -101,5 +118,6 @@ module.exports = {
     signUp,
     signIn,
     getProfile,
+    updateProfile,
     getProfileWithRecipes
 }

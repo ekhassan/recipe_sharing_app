@@ -76,7 +76,7 @@ const Navbar = () => {
                                     <span className="block text-lg font-bold">{user?.username || 'Guest'}</span>
                                     <span className="block truncate text-sm font-black">{user?.email || 'No Email'}</span>
                                 </Dropdown.Header>
-                                <Dropdown.Item as={Link} to={`/${user?.username}`}>Dashboard</Dropdown.Item>
+                                <Dropdown.Item as={Link} to={`/u/${user?.username}`}>Dashboard</Dropdown.Item>
                                 <Dropdown.Item as={Link} to="/settings">Settings</Dropdown.Item>
                                 <Dropdown.Item as={Link} to="/earnings">Earnings</Dropdown.Item>
                                 <Dropdown.Divider />

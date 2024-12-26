@@ -23,7 +23,6 @@ const RecipeFeed = () => {
 
     // Update recipes when new data is fetched
     useEffect(() => {
-        console.log(data);
 
         if (data && data.recipes) {
             setRecipes((prevRecipes) => [...prevRecipes, ...data.recipes]);

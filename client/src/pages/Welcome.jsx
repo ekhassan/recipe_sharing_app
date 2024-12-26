@@ -1,3 +1,9 @@
+import { useQuery } from "@tanstack/react-query"
+import { toast } from "react-hot-toast"
+import { getAllRecipes } from "../api/recipe/recipeApi"
+
+
+import Loading from "../components/Loading"
 import PopularRecipeCard from '../components/PopularRecipeCard'
 
 
@@ -7,13 +13,23 @@ import cate from "../assets/images/meat.png"
 import Category from "../components/Category"
 import UnderMin from "../components/UnderMin"
 
-// import { X } from "lucide-react"
+
 
 
 const Welcome = () => {
 
+    const { data: recipesData, isLoading: recipeLoading, isError: recipesError, error: recipeError } = useQuery({
+        queryKey: ['recipes'],
+        queryFn: getAllRecipes,
+    })
 
-    const tags = ["Italian", "Meat", "Main Course"]
+    const recipes = recipesData?.recipes
+
+    if (recipeLoading) return <Loading />
+    if (recipesError) {
+        toast.error(recipeError)
+    }
+
 
     return (
         <>
@@ -25,14 +41,10 @@ const Welcome = () => {
 
                     <div className="my-10 overflow-x-auto">
                         <div className="flex snap-x gap-x-5">
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
-                            <PopularRecipeCard img={image} name={'Easy Meatballs with Arugula'} likes={10} comments={20} tops={"25k"} tags={tags} />
+                            {recipes ? recipes.map(recipe => (
+                                <PopularRecipeCard key={recipe._id} id={recipe._id} img={recipe.image} name={recipe.title} likes={10} comments={20} tops={"25k"} tags={recipe.tags} />
+                            )) : ""}
+
                         </div>
                     </div>
                 </section>

@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import { Button } from "flowbite-react";
+import { Button, Checkbox, Label } from "flowbite-react";
 import Editor from "../components/Editor";
 import TextInput from "../components/TextInput";
 import { createRecipe } from "../api/recipe/recipeApi";
@@ -10,9 +10,10 @@ import TagInput from "../components/TagInput";
 
 const AddRecipe = () => {
     const mutation = useMutation({
-        mutationFn: ({ image, title, ingredients, details, directions, notes, tags }) =>
-            createRecipe(image, title, ingredients, details, notes, directions, tags),
+        mutationFn: ({ image, title, ingredients, details, directions, under30min, notes, tags }) =>
+            createRecipe(image, title, ingredients, details, notes, directions, under30min, tags),
         onSuccess: (data) => {
+            formik.resetForm();
             console.log(data);
         },
     });
@@ -51,6 +52,7 @@ const AddRecipe = () => {
             ingredients: "",
             details: "",
             directions: "",
+            under30min: false,
             tags: [],
         },
         validate,
@@ -76,6 +78,7 @@ const AddRecipe = () => {
                         ingredients: values.ingredients,
                         details: values.details,
                         directions: values.directions,
+                        under30min: values.under30min,
                         tags: values.tags,
                     }),
                     {
@@ -90,6 +93,7 @@ const AddRecipe = () => {
             }
         },
     });
+
 
     const handleDisplayPicture = (event) => {
         const file = event.target.files[0];
@@ -190,13 +194,22 @@ const AddRecipe = () => {
                         {formik.touched.tags && formik.errors.tags ? (
                             <div className="text-red-500 text-xs mb-3">{formik.errors.tags}</div>
                         ) : null}
-
+                        <div className="flex  items-center gap-4">
+                            <Checkbox id="accept"
+                                checked={formik.values.under30min}
+                                onChange={() => formik.setFieldValue('under30min', !formik.values.under30min)}
+                                color="bg-[#ec4700]" className="checked:bg-[#ec4700] focus:ring-2 focus:ring-[#ec4700]  transform scale-120" />
+                            <Label htmlFor="accept" className="flex">
+                                <h3 className="my-2 font-medium text-lg">Can your recipe be done in <span className="font-bold text-[#ec4700]">Under 30 minutes</span> ?</h3>
+                            </Label>
+                        </div>
                         <div>
                             <Button
                                 className="bg-[#ec4700] hover:bg-[#ec4700] text-white text-base font-medium focus:ring-0 float-end my-6"
                                 pill
                                 type="submit"
                                 color='bg-[#ec4700]'
+                                disabled={mutation.isLoading}
                             >
                                 Add Recipe
                             </Button>

@@ -9,7 +9,7 @@ export const getRecipe = async (id) => {
     const response = await api.get(`/recipe/${id}`);
     return response.data;
 }
-export const createRecipe = async (image, title, ingredients, details, notes, directions, tags) => {
+export const createRecipe = async (image, title, ingredients, details, notes, directions, under30min, tags) => {
     const recipe = {
         image,
         videoUrl: null,
@@ -18,8 +18,10 @@ export const createRecipe = async (image, title, ingredients, details, notes, di
         details,
         notes,
         directions,
+        under30min,
         tags,
     };
+
 
     const response = await api.post('/recipe/addRecipe', recipe);
 

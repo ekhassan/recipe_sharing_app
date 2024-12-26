@@ -27,9 +27,9 @@ const getAllRecipes = async (req, res) => {
 const addRecipe = async (req, res) => {
     try {
         const userId = req.userId
-        const { image, videoUrl, title, notes, details, ingredients, directions, tags, ratings } = req.body;
+        const { image, videoUrl, title, notes, details, ingredients, directions, tags, ratings, under30min } = req.body;
 
-        const recipe = await Recipe.create({ image, videoUrl, title, ingredients, details, notes, directions, tags, ratings, userId });
+        const recipe = await Recipe.create({ image, videoUrl, title, ingredients, details, notes, directions, under30min, tags, ratings, userId });
 
         return res.status(201).json({ message: "Recipe Created Successfully", recipe })
 

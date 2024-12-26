@@ -38,22 +38,23 @@ const DashBoard = () => {
                     <div className="my-10">
                         <h2 className="text-2xl font-medium">My Recipes</h2>
                         <div className="my-10">
+                            <div className="grid grid-cols-1 2xl:grid-cols-4 sm:grid-cols-2 gap-5" >
+                                {recipes && recipes.length > 0 ? (
+                                    recipes.map((recipe) => (
 
-                            {recipes && recipes.length > 0 ? (
-                                recipes.map((recipe) => (
-                                    <div className="grid grid-cols-1 2xl:grid-cols-4 sm:grid-cols-2 gap-5" key={recipe._id}>
                                         <RecipeList
+                                            key={recipe._id}
                                             id={recipe._id}
                                             title={recipe.title}
                                             img={recipe.image}
                                             notes={recipe.notes}
                                         />
-                                    </div>
-                                ))
-                            ) : (
-                                <h1 className="text-xl text-center">No recipes.</h1>
-                            )}
 
+                                    ))
+                                ) : (
+                                    <h1 className="text-xl text-center">No recipes.</h1>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

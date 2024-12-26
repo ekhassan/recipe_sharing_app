@@ -3,7 +3,7 @@ import { Card, Rating } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 const RecipeCard = ({ _id, title, image }) => {
-    console.log(image)
+
     return (
         <div>
             <Link to={`/detail/${_id}`} >

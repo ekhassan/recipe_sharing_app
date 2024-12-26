@@ -31,6 +31,12 @@ const recipeSchema = new mongoose.Schema({
         type: [String],
         required: true,
     },
+    under30min: {
+        type: Boolean,
+        required: true,
+        default: false,
+    }
+    ,
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

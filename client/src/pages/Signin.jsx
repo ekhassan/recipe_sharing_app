@@ -11,6 +11,7 @@ import useAuthStore from "../store/useAuthStore"
 const Signin = () => {
 
     const navigate = useNavigate();
+
     const { login } = useAuthStore();
 
     const mutation = useMutation({
@@ -21,7 +22,7 @@ const Signin = () => {
         }),
         onSuccess: (data) => {
             login(data.token);
-            navigate('/');
+            navigate(window.history.back() || "/")
         }
     });
 
