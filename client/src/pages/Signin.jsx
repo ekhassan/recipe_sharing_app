@@ -91,7 +91,7 @@ const Signin = () => {
 
                     <div className="my-6 text-center">
                         Don&apos;t have an account?{" "}
-                        <Link to="/signup" className="text-[#ec4700]">
+                        <Link to="/signup" className="text-[#ec4700] underline hover:no-underline">
                             Sign Up
                         </Link>
                     </div>

@@ -62,7 +62,22 @@ const signIn = async (req, res) => {
         console.error(err);
         return res.status(500).json({ message: "Internal server error" });
     }
+}
 
+const signOut = async (_, res) => {
+    try {
+        res.clearCookie("token", {
+            httpOnly: true,
+            sameSite: 'Strict',
+            secure: process.env.NODE_ENV === 'production',
+        });
+
+        return res.status(200).json({ message: "Logout Successful" });
+    }
+    catch (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
+    }
 }
 
 const getProfile = async (req, res) => {
@@ -114,9 +129,11 @@ const getProfileWithRecipes = async (req, res) => {
     }
 }
 
+
 module.exports = {
     signUp,
     signIn,
+    signOut,
     getProfile,
     updateProfile,
     getProfileWithRecipes

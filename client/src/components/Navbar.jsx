@@ -24,7 +24,6 @@ const Navbar = () => {
                     const userData = await getUser();
                     setUser(userData.user);
                 } catch (error) {
-                    localStorage.clear("auth-storage");
                     console.error('Error fetching user data:', error);
                 }
             }

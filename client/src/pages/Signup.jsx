@@ -213,7 +213,7 @@ const Signup = () => {
             {/* Link to Sign In */}
             <div className="my-6">
               Already have an account?{" "}
-              <Link to={'/signin'} className="text-[#ec4700]">Sign In</Link>
+              <Link to={'/signin'} className="text-[#ec4700] underline hover:no-underline">Sign In</Link>
             </div>
           </div>
         </form>

@@ -12,8 +12,6 @@ import Category from "../components/Category"
 import UnderMin from "../components/UnderMin"
 
 
-
-
 const Welcome = () => {
 
     const { data: recipesData, isLoading: recipeLoading, isError: recipesError, error: recipeError } = useQuery({
@@ -77,7 +75,7 @@ const Welcome = () => {
                 <section className="py-5">
                     <h2 className="text-2xl font-medium">Under 30 Minutes</h2>
                     <div className="my-10">
-                        <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-y-5 md:gap-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-y-5 md:gap-10">
                             {under30min ?
                                 under30min.map((underMin) =>
                                     <UnderMin key={underMin._id} id={underMin._id} img={underMin.image} name={underMin.title} tags={underMin.tags} />
