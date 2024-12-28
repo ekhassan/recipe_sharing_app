@@ -46,27 +46,27 @@ const RecipeList = ({ id, title, img, notes }) => {
                 </Link>
                 <div className="absolute top-5 right-5">
                     <Dropdown className="font-medium rounded-3xl bg-[#fdfaf5]" dismissOnClick={false} renderTrigger={() => <EllipsisVertical />}>
-                        <Dropdown.Item className="focus:rounded-t-3xl hover:rounded-t-3xl">Edit</Dropdown.Item>
-                        <Dropdown.Item >View</Dropdown.Item>
+                        <Dropdown.Item as={Link} to={`/edit-recipe/${id}`} className="focus:rounded-t-3xl hover:rounded-t-3xl">Edit</Dropdown.Item>
+                        <Dropdown.Item as={Link} to={`/detail/${id}`} >View</Dropdown.Item>
                         <Dropdown.Item onClick={() => setOpenModal(true)} className="focus:rounded-b-3xl hover:rounded-b-3xl text-red-600">Delete</Dropdown.Item>
                     </Dropdown>
                 </div>
             </Card>
 
 
-            <Modal className="rounded-3xl" show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+            <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
                 <Modal.Header />
-                <Modal.Body>
+                <Modal.Body >
                     <div className="text-center">
                         <Info className="mx-auto mb-4 h-14 w-14 text-[#ec4700]" />
                         <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Are you sure you want to delete this product?
+                            Are you sure you want to delete this recipe?
                         </h3>
                         <div className="flex justify-center gap-4">
-                            <Button pill color="failure" onClick={() => handleDelete()} loading={mutation.isLoading}>
+                            <Button className="font-medium" pill color="failure" onClick={() => handleDelete()} loading={mutation.isLoading}>
                                 {"Yes, I'm sure"}
                             </Button>
-                            <Button pill color="gray" onClick={() => setOpenModal(false)}>
+                            <Button className="font-medium hover:!text-[#ec4700]" pill color="gray" onClick={() => setOpenModal(false)}>
                                 No, cancel
                             </Button>
                         </div>

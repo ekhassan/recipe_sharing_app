@@ -6,8 +6,6 @@ import { getAllRecipes } from "../api/recipe/recipeApi"
 import Loading from "../components/Loading"
 import PopularRecipeCard from '../components/PopularRecipeCard'
 
-
-import image from "../assets/images/recipeCard.png"
 import cate from "../assets/images/meat.png"
 
 import Category from "../components/Category"
@@ -24,6 +22,15 @@ const Welcome = () => {
     })
 
     const recipes = recipesData?.recipes
+
+    let under30min = [];
+    for (let i = 0; i < recipes?.length && under30min?.length < 8; i++) {
+
+        if (recipes[i]?.under30min) {
+            under30min.push(recipes[i]);
+        }
+    }
+
 
     if (recipeLoading) return <Loading />
     if (recipesError) {
@@ -70,11 +77,12 @@ const Welcome = () => {
                 <section className="py-5">
                     <h2 className="text-2xl font-medium">Under 30 Minutes</h2>
                     <div className="my-10">
-                        <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 md:gap-10">
-                            <UnderMin img={image} name={"Easy Meatballs with Arugula"} />
-                            <UnderMin img={image} name={"Testing"} />
-                            <UnderMin img={image} name={"Testing"} />
-                            <UnderMin img={image} name={"Testing"} />
+                        <div className="grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-y-5 md:gap-10">
+                            {under30min ?
+                                under30min.map((underMin) =>
+                                    <UnderMin key={underMin._id} id={underMin._id} img={underMin.image} name={underMin.title} tags={underMin.tags} />
+                                ) :
+                                "No Under 30 Minutes Recipes."}
                         </div>
                     </div>
                 </section>

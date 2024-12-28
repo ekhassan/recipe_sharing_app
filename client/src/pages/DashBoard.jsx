@@ -34,7 +34,7 @@ const DashBoard = () => {
         <>
             <main className="mx-5 sm:mx-32 ">
                 <div className="py-24">
-                    <UserProfile user={user} />
+                    <UserProfile user={user} posts={recipes?.length} followers={10} followings={10} />
                     <div className="my-10">
                         <h2 className="text-2xl font-medium">My Recipes</h2>
                         <div className="my-10">

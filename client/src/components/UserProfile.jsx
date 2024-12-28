@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Card, Button } from "flowbite-react"
+import { Link } from "react-router-dom"
 
 
-const UserProfile = ({ user }) => {
+const UserProfile = ({ user, posts, followers, followings }) => {
     return (
         <>
             <Card className="rounded-3xl bg-[#fdfaf5]">
@@ -15,9 +16,9 @@ const UserProfile = ({ user }) => {
                         <h2 className="text-2xl font-bold">{user?.name}</h2>
                         <h4 className="text-lg font-medium">{user?.username}</h4>
                         <div className="flex items-center justify-between w-full font-medium gap-5">
-                            <span>200 Posts</span>
-                            <span>12 Followers</span>
-                            <span>400k Following</span>
+                            <span>{posts} Posts</span>
+                            <span>{followers} Followers</span>
+                            <span>{followings} Following</span>
                         </div>
                     </div>
                     <div className="flex gap-4">
@@ -26,6 +27,8 @@ const UserProfile = ({ user }) => {
                             className="bg-[#ec4700] text-white focus:ring-0"
                             pill>Follow</Button>
                         <Button
+                            as={Link}
+                            to={'/settings'}
                             color="bg-[#ec4700]"
                             className="bg-[#ec4700] text-white focus:ring-0"
                             pill>Edit Profile</Button>

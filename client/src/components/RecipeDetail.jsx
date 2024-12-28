@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
 import { useRef } from "react"
-import { Button, Popover } from "flowbite-react"
+import { Button, Popover, Badge, Tooltip } from "flowbite-react"
 import { QrCode, Zap, ImageDown } from "lucide-react"
 import * as htmlToImage from "html-to-image"
 import QRCode from 'react-qr-code'
 import { toast } from "react-hot-toast"
 import parse from 'html-react-parser'
+import { HiCheck, HiClock, HiCalendar } from "react-icons/hi";
 
-const RecipeDetail = ({ img, name, tags, notes, details, ingredients, directions, user }) => {
+
+import { timeAgo, formatDate, formatTime } from "../utils/util"
+
+const RecipeDetail = ({ img, name, tags, notes, details, ingredients, directions, under30min, createdAt, updatedAt, user }) => {
 
     const qrCodeRef = useRef();
 
@@ -37,7 +41,11 @@ const RecipeDetail = ({ img, name, tags, notes, details, ingredients, directions
         <>
             <div>
                 <div className="py-10">
-                    <h1 className="text-4xl font-medium mb-3">{name}</h1>
+                    <div className="flex items-center justify-between">
+                        <h1 className="text-4xl font-medium mb-3">{name}</h1>
+                        {under30min ?
+                            <Badge size="sm" className="rounded-3xl bg-[#ec4700]/20 text-gray-900 text-base">Under 30 Minutes Recipe</Badge> : ""}
+                    </div>
                     <div className="flex flex-wrap gap-1 mt-3">
                         {tags && tags.map((tag) => (
                             <span key={tag} className="px-2 py-1 bg-slate-400/30 text-xs rounded-full font-medium">{tag}</span>
@@ -46,6 +54,19 @@ const RecipeDetail = ({ img, name, tags, notes, details, ingredients, directions
                     <div className="bg-orange-500 w-full h-[26.75rem] my-5 rounded-3xl overflow-hidden">
                         <img src={img ? img : "https://worldfoodtour.co.uk/wp-content/uploads/2013/06/neptune-placeholder-48-300x300.jpg"} alt={name} className="w-full h-full object-cover" />
                     </div>
+
+                    <div className="my-3 flex gap-4">
+                        <Tooltip content="Creation Date">
+                            <Badge size="sm" icon={HiCalendar} className="rounded-3xl bg-[#ec4700]/20 text-gray-900 " >{formatDate(createdAt)}</Badge>
+                        </Tooltip>
+                        <Tooltip content="Created At">
+                            <Badge size="sm" icon={HiClock} className="rounded-3xl bg-[#ec4700]/20 text-gray-900 " >{formatTime(createdAt)}</Badge>
+                        </Tooltip>
+                        <Tooltip content="Updated At">
+                            <Badge size="sm" icon={HiCheck} className="rounded-3xl bg-[#ec4700]/20 text-gray-900" >{timeAgo(updatedAt)}</Badge>
+                        </Tooltip>
+                    </div>
+
                     {/* Profile section */}
                     <div className="flex items-center justify-between my-5">
                         <div className="flex items-center gap-3">

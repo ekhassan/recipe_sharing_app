@@ -48,7 +48,7 @@ const TextInput = ({ type, label, name, placeholder, value, onChange, onBlur }) 
                         {imageSrc && (
                             <div className="my-6 flex items-center justify-center">
                                 <img
-                                    src={imageSrc}
+                                    src={imageSrc || value}
                                     alt="Uploaded preview"
                                     className="w-28 h-28 object-cover rounded-full cursor-pointer"
                                     onClick={openOverlay}

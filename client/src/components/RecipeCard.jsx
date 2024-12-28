@@ -4,14 +4,16 @@ import { Link } from "react-router-dom";
 
 const RecipeCard = ({ _id, title, image }) => {
 
+    
+
     return (
         <div>
             <Link to={`/detail/${_id}`} >
-                <Card className="rounded-3xl bg-[#fdfaf5] overflow-hidden "
+                <Card className="rounded-3xl bg-[#fdfaf5] overflow-hidden mb-4"
                     imgAlt="Recipe Image"
                     imgSrc={image ? image : "https://worldfoodtour.co.uk/wp-content/uploads/2013/06/neptune-placeholder-48-300x300.jpg"}
                 >
-                    <h3>{title}</h3>
+                    <h3 className="text-lg font-medium">{title}</h3>
 
                     <Rating>
                         <Rating.Star />

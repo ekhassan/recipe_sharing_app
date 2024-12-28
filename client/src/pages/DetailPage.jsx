@@ -78,7 +78,11 @@ const DetailPage = () => {
                         notes={recipe?.notes || ""}
                         details={recipe?.details || ""}
                         ingredients={recipe?.ingredients || ""}
-                        directions={recipe?.directions || ""} />
+                        directions={recipe?.directions || ""}
+                        under30min={recipe?.under30min}
+                        createdAt={recipe?.createdAt}
+                        updatedAt={recipe?.updatedAt}
+                    />
 
                     <div>
                         <h2 className="text-2xl font-medium">Comments</h2>

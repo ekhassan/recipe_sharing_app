@@ -11,10 +11,15 @@ import TagInput from "../components/TagInput";
 const AddRecipe = () => {
     const mutation = useMutation({
         mutationFn: ({ image, title, ingredients, details, directions, under30min, notes, tags }) =>
-            createRecipe(image, title, ingredients, details, notes, directions, under30min, tags),
-        onSuccess: (data) => {
+            toast.promise(createRecipe(image, title, ingredients, details, notes, directions, under30min, tags),
+                {
+                    loading: "Add Recipe...",
+                    success: "Recipe Added",
+                    error: (err) => toast.error(err.response?.data?.message || err.message)
+                }),
+        onSuccess: () => {
             formik.resetForm();
-            console.log(data);
+
         },
     });
 
@@ -68,25 +73,16 @@ const AddRecipe = () => {
                 const fileData = await uploadCare.uploadFile(values.image);
                 const imageUrl = fileData.cdnUrl;
 
-                console.log(imageUrl);
-
-                toast.promise(
-                    mutation.mutateAsync({
-                        title: values.title,
-                        image: imageUrl,
-                        notes: values.notes,
-                        ingredients: values.ingredients,
-                        details: values.details,
-                        directions: values.directions,
-                        under30min: values.under30min,
-                        tags: values.tags,
-                    }),
-                    {
-                        loading: "Adding Recipe...",
-                        success: "Recipe created successfully!",
-                        error: (err) => err.response?.data?.message || err.message,
-                    }
-                );
+                mutation.mutateAsync({
+                    title: values.title,
+                    image: imageUrl,
+                    notes: values.notes,
+                    ingredients: values.ingredients,
+                    details: values.details,
+                    directions: values.directions,
+                    under30min: values.under30min,
+                    tags: values.tags,
+                })
             } catch (err) {
                 toast.error("Image upload failed");
                 console.error(err);
@@ -94,6 +90,7 @@ const AddRecipe = () => {
         },
     });
 
+    console.log(mutation.isLoading)
 
     const handleDisplayPicture = (event) => {
         const file = event.target.files[0];
@@ -211,7 +208,7 @@ const AddRecipe = () => {
                                 color='bg-[#ec4700]'
                                 disabled={mutation.isLoading}
                             >
-                                Add Recipe
+                                {mutation.isLoading ? "Adding Recipe..." : "Add Recipe"}
                             </Button>
                         </div>
                     </form>

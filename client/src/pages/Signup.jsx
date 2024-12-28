@@ -15,6 +15,7 @@ const Signup = () => {
     mutationFn: ({ name, username, email, password, displayPicture }) => signup(name, username, email, password, displayPicture),
     onSuccess: (data) => {
       console.log(data);
+      formik.resetForm();
       navigate('/signin');
     }
   });
@@ -65,6 +66,7 @@ const Signup = () => {
         const imageUrl = fileData.cdnUrl;
 
         toast.promise(mutation.mutateAsync({
+          name: values.name,
           username: values.username,
           email: values.email,
           password: values.password,
@@ -105,7 +107,7 @@ const Signup = () => {
             <div className="my-6">
               <TextInput
                 type="file"
-                label="Upload Image"
+                label="Profile Picture"
                 name="displayPicture"
                 onChange={handleDisplayPicture}
                 onBlur={formik.handleBlur} // Add this line for handling blur events
@@ -202,6 +204,7 @@ const Signup = () => {
                 className="bg-[#ec4700] hover:bg-[#ec4700] text-white text-base font-medium focus:ring-0 w-full"
                 color="bg-[#ec4700]"
                 pill
+                disabled={mutation.isLoading}
               >
                 Sign up
               </Button>

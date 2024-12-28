@@ -5,7 +5,7 @@ const getComment = async (req, res) => {
     try {
         const { recipeId } = req.params
 
-        const comments = await Comment.find({ recipeId }).populate('userId', "username displayPicture");
+        const comments = await Comment.find({ recipeId }).populate('userId', "username displayPicture").sort({ createAt: -1 });
 
         if (comments.length === 0) {
             return res.status(404).json({ message: "No comments found" })

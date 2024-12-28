@@ -2,12 +2,10 @@ const Recipe = require("../models/recipe.model");
 
 
 const getAllRecipes = async (req, res) => {
-    const { page = 1, limit = 10 } = req.query;
+    const { } = req.query;
 
     try {
-        const recipes = await Recipe.find()
-            .skip((page - 1) * limit)
-            .limit(Number(limit));
+        const recipes = await Recipe.find();
 
         const totalRecipes = await Recipe.countDocuments();
 
@@ -15,8 +13,6 @@ const getAllRecipes = async (req, res) => {
             message: "Recipe fetched successfully",
             recipes,
             total: totalRecipes,
-            page: Number(page),
-            totalPages: Math.ceil(totalRecipes / limit),
         });
     } catch (err) {
         console.error(err);
