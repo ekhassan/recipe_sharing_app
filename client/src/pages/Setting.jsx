@@ -1,7 +1,7 @@
 import { useFormik } from "formik"
 import { Button, Card } from "flowbite-react"
 import { toast } from "react-hot-toast"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 import { useQuery, useMutation } from "@tanstack/react-query"
 
 import { getUser, updateProfile } from "../api/auth/AuthApi"
@@ -11,7 +11,7 @@ import uploadCare from "../api/uploadCare/uploadImage"
 
 const Setting = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     const { data: userData } = useQuery({
         queryKey: ['user'],
@@ -26,8 +26,8 @@ const Setting = () => {
         mutationFn: ({ name, displayPicture }) => {
             updateProfile(name, displayPicture);
         },
-        onSuccess: (data) => {
-            console.log(data);
+        onSuccess: () => {
+            // console.log(data);
         }
     })
 
@@ -40,7 +40,6 @@ const Setting = () => {
     }
 
     const handleSubmit = async (values) => {
-        console.log(values)
         try {
             const fileData = await uploadCare.uploadFile(values.displayPicture)
             const displayPicture = fileData.file
@@ -60,7 +59,7 @@ const Setting = () => {
         },
         validate,
         onSubmit: async (values) => {
-            console.log(values)
+
             await toast.promise(handleSubmit(values), {
                 loading: "Updating Profile...",
                 success: "Profile Updated Successfully",
@@ -76,7 +75,7 @@ const Setting = () => {
         });
     }
 
-    console.log(formik.values)
+    
 
     return (
         <>

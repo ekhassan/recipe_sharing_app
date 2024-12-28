@@ -16,7 +16,7 @@ const commentRoutes = require("./routes/comment.route")
 
 connectDB();
 app.use(cors({
-    origin: ["http://localhost:5173", "http://192.168.10.3:5173", "https://freshlyy.vercel.app"],
+    origin: ["http://localhost:5173", "http://192.168.10.5:5173", "https://freshlyy.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true
 }))

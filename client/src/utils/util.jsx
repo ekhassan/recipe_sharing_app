@@ -52,3 +52,10 @@ export const formatTime = (dateString) => {
 
     return `${hours}:${minutes} ${ampm}`;
 };
+
+export const calculateAverageRating = (ratings) => {
+    if (!ratings.length) return 0;
+
+    const total = ratings.reduce((acc, rating) => acc + rating.ratingValue, 0);
+    return total / ratings.length;
+}

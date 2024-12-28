@@ -13,8 +13,7 @@ const Signup = () => {
 
   const mutation = useMutation({
     mutationFn: ({ name, username, email, password, displayPicture }) => signup(name, username, email, password, displayPicture),
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       formik.resetForm();
       navigate('/signin');
     }
@@ -86,13 +85,10 @@ const Signup = () => {
 
   const handleDisplayPicture = (event) => {
     const file = event.target.files[0];
-    console.log(file.name);
-
     formik.setFieldValue("displayPicture", file);
   };
 
-  console.log(formik.values)
-  console.log(mutation)
+
 
   return (
     <main className="mx-5 sm:mx-32">

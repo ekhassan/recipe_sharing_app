@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Card, Rating } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { calculateAverageRating } from "../utils/util"
 
-const RecipeCard = ({ _id, title, image }) => {
+const RecipeCard = ({ _id, title, image, ratings }) => {
 
-    
+    const averageRating = calculateAverageRating(ratings);
 
     return (
         <div>
@@ -16,12 +17,12 @@ const RecipeCard = ({ _id, title, image }) => {
                     <h3 className="text-lg font-medium">{title}</h3>
 
                     <Rating>
-                        <Rating.Star />
-                        <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">4.95</p>
+                        <Rating.Star filled={averageRating === 0 ? false : true} />
+                        <p className="ml-2 text-sm font-bold text-gray-900 dark:text-white">{averageRating.toFixed(2)}</p>
                         <span className="mx-1.5 h-1 w-1 rounded-full bg-gray-500 dark:bg-gray-400" />
 
                         <span className="text-sm font-medium text-gray-900 underline hover:no-underline dark:text-white">
-                            73 reviews
+                            {ratings.length} ratings
                         </span>
                     </Rating>
                 </Card>

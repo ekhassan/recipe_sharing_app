@@ -129,7 +129,7 @@ const EditRecipe = () => {
         const file = event.target.files[0];
         formik.setFieldValue("image", file);
     };
-    console.log(mutation)
+ 
 
     return (
         <>

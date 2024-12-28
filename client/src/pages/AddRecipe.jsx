@@ -90,7 +90,7 @@ const AddRecipe = () => {
         },
     });
 
-    console.log(mutation.isLoading)
+    
 
     const handleDisplayPicture = (event) => {
         const file = event.target.files[0];

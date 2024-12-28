@@ -18,7 +18,6 @@ const DashBoard = () => {
     const user = data?.user
     const recipes = data?.recipes
 
-    console.log(recipes);
 
 
     if (isLoading) {

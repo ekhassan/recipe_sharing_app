@@ -1,7 +1,7 @@
 import api from '../api';
 
-export const getAllRecipes = async ({ page = 1 }) => {
-    const response = await api.get(`/recipe/?page=${page}`);
+export const getAllRecipes = async ({ page = 1, limit = 30 }) => {
+    const response = await api.get(`/recipe/?page=${page}&limit=${limit}`);
     return response.data;
 }
 
