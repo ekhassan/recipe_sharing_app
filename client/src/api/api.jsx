@@ -9,12 +9,15 @@ const api = axios.create({
     // withCredentials: true,
 });
 
+
+
 // Add a request interceptor
 api.interceptors.request.use(
     (config) => {
-        const { token } = useAuthStore.getState(); 
+        const { token } = useAuthStore.getState();
+        console.log("token : ", token)
         if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`; 
+            config.headers['Authorization'] = `Bearer ${token}`;
         }
         return config;
     },
