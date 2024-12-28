@@ -28,7 +28,7 @@ app.use(morgan('dev'));
 
 // Test Route
 app.get("/", (_, res) => {
-    res.send("Hello World");
+    res.json({ message: "Hello from the back-end of freshly!" });
 })
 
 // Routes
