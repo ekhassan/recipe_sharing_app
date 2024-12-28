@@ -46,12 +46,12 @@ const signIn = async (req, res) => {
             if (isMatch) {
                 const token = await User.generateAuthToken(user);
 
-                res.cookie("token", token, {
-                    httpOnly: true,
-                    maxAge: 7 * 60 * 60 * 1000,
-                    sameSite: 'Strict',
-                    secure: process.env.NODE_ENV === 'production',
-                });
+                // res.cookie("token", token, {
+                //     httpOnly: true,
+                //     maxAge: 7 * 60 * 60 * 1000,
+                //     sameSite: 'Strict',
+                //     secure: process.env.NODE_ENV === 'production',
+                // });
 
                 return res.status(200).json({ message: "Login Successful", token });
             } else {
