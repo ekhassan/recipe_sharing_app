@@ -80,7 +80,7 @@ const RecipeDetail = ({ img, name, tags, notes, details, ingredients, directions
                                 className="bg-[#fdfaf5] border rounded-3xl shadow-2xl"
                                 content={
                                     <div className="p-3 bg-[#fdfaf5] rounded-3xl" >
-                                        <QRCode className="p-1" value={`http://localhost:5173/${user?.username}`} size={128} bgColor="#fdfaf5" fgColor="#ec4700" ref={qrCodeRef} />
+                                        <QRCode className="p-1" value={`https://freshlyy.vercel.app/u/${user?.username}`} size={128} bgColor="#fdfaf5" fgColor="#ec4700" ref={qrCodeRef} />
                                         <p className="mt-2 text-wrap text-xs font-semibold text-center">Scan to view profile.</p>
                                         <Button onClick={downloadQRCode} className="flex items-center justify-center bg-[#ec4700] hover:bg-[#ec4700] text-white text-base font-medium focus:ring-0 rounded-full h-10 w-10 absolute right-0" color="bg-[#ec4700]"><ImageDown size={20} /></Button>
                                     </div>
