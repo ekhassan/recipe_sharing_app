@@ -46,8 +46,6 @@ const RecipeFeed = () => {
         }
     }, [data]);
 
-    console.log(recipes)
-
     const handleScroll = () => {
         if (!hasMore || isLoading) return;
 

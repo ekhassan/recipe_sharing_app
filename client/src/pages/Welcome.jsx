@@ -21,6 +21,7 @@ const Welcome = () => {
 
     const recipes = recipesData?.recipes
 
+
     let under30min = [];
     for (let i = 0; i < recipes?.length && under30min?.length < 8; i++) {
 

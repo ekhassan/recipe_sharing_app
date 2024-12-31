@@ -24,12 +24,13 @@ const Navbar = () => {
                     const userData = await getUser();
                     setUser(userData.user);
                 } catch (error) {
+                    logout();
                     console.error('Error fetching user data:', error);
                 }
             }
         };
         fetchUser();
-    }, [isAuthenticated]);
+    }, [isAuthenticated, logout]);
 
     return (
         <header className="transition-all duration-500 fixed w-full backdrop-blur-3xl z-10">
@@ -61,6 +62,7 @@ const Navbar = () => {
                                     src={isAuthenticated && user ? user.displayPicture : logo}
                                     alt={isAuthenticated && user ? user.username : "Profile Picture"}
                                     className="w-full h-full object-cover"
+                                    loading="lazy"
                                 />
                             </div>
                         }

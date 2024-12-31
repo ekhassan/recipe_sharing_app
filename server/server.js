@@ -11,7 +11,8 @@ const connectDB = require("./db/db");
 
 const authRoutes = require("./routes/auth.route");
 const recipeRoutes = require("./routes/recipe.route");
-const commentRoutes = require("./routes/comment.route")
+const commentRoutes = require("./routes/comment.route");
+const followeRoutes = require("./routes/follow.route");
 
 
 connectDB();
@@ -34,7 +35,8 @@ app.get("/", (_, res) => {
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/recipe', recipeRoutes);
-app.use('/api/comments', commentRoutes)
+app.use('/api/comments', commentRoutes);
+app.use('/api/', followeRoutes);
 
 const Port = process.env.PORT || 5000;
 

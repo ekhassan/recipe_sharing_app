@@ -1,13 +1,11 @@
 import { Heart, MessageCircleMore, Zap } from "lucide-react"
 import { Link } from "react-router-dom"
 
-
-
 // eslint-disable-next-line react/prop-types
 const PopularRecipeCard = ({ id, img, name, tags, likes, comments, tops }) => {
 
     return (
-        <div className="snap-start" >
+        <div className="snap-start">
             <div className=" h-96 w-64 rounded-3xl relative overflow-hidden">
                 <img className="w-full h-full object-cover"
                     src={img} alt={""} />

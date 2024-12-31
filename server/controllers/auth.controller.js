@@ -97,9 +97,7 @@ const getProfile = async (req, res) => {
 const updateProfile = async (req, res) => {
     try {
         const { name, displayPicture } = req.body;
-        if (!name || !displayPicture) {
-            return res.status(500).json({ message: "Name and Display Picture are required,To Update Profile" });
-        }
+
         const user = await User.findByIdAndUpdate(req.userId, { name, displayPicture }, { new: true }).select('-password');
         if (!user) {
             return res.status(404).json({ message: "User not found" });

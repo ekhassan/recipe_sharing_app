@@ -22,7 +22,7 @@ const Signin = () => {
         }),
         onSuccess: (data) => {
             login(data.token);
-            navigate(window.history.back() || "/")
+            navigate("/")
         }
     });
 

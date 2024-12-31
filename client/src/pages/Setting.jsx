@@ -15,7 +15,7 @@ const Setting = () => {
 
     const { data: userData } = useQuery({
         queryKey: ['user'],
-        queryFn: () => getUser()
+        queryFn: () => getUser(),
     });
 
     const user = userData?.user;
@@ -75,7 +75,7 @@ const Setting = () => {
         });
     }
 
-    
+
 
     return (
         <>

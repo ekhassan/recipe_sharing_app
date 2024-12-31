@@ -1,0 +1,386 @@
+{
+    "info": {
+        "_postman_id": "f8fca6b2-e2ee-45a2-9734-a075c5c53859",
+        "name": "RecipeShare",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "Auth",
+            "item": [
+                {
+                    "name": "SignIn",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "https://recipe-sharing-app--rho.vercel.app/api/auth/signin",
+                            "path": [
+                                "api",
+                                "auth",
+                                "signin"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "recipe-sharing-app--rho",
+                                "vercel",
+                                "app"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"email\":\"ek.hassan.07@gmail.com\",\n  \"password\":\"1234567890\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "SignUp",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "https://recipe-sharing-app--rho.vercel.app/auth/signup",
+                            "path": [
+                                "auth",
+                                "signup"
+                            ],
+                            "protocol": "https",
+                            "host": [
+                                "recipe-sharing-app--rho",
+                                "vercel",
+                                "app"
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\":\"Muhammad Ehtasham-Ul-Hassan\",\n  \"username\": \"ek_hassan_07\",\n  \"email\": \"ek.hassan.07@gmail.com\",\n  \"password\": \"1234567890\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Profile",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:5000/api/auth/profile",
+                            "path": [
+                                "api",
+                                "auth",
+                                "profile"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                },
+                {
+                    "name": "Get User By Id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:5000/api/auth/user/67597511592b96a7a4561960",
+                            "path": [
+                                "api",
+                                "auth",
+                                "user",
+                                "67597511592b96a7a4561960"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                },
+                {
+                    "name": "Get User's Recipes",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:5000/api/auth/ek_hassan_07",
+                            "path": [
+                                "api",
+                                "auth",
+                                "ek_hassan_07"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Profile",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:5000/api/auth/update-profile",
+                            "path": [
+                                "api",
+                                "auth",
+                                "update-profile"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"Muhammad Ehtasham-Ul-Hassan\",\n  \"displayPicture\": \"https://ucarecdn.com/e7749565-8a2f-4f97-acbf-916d1de51768/\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "SignOut",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:5000/api/auth/signOut",
+                            "path": [
+                                "api",
+                                "auth",
+                                "signOut"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        },
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzZmZjhkODBkMWIwYjZmZjliOGM2ZjkiLCJpYXQiOjE3MzUzOTkyOTR9.rY_ay7Nee3LcvLUSCIUnjsjZ0U6k7pPiLCvpNZHJEBM",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Recipe",
+            "item": [
+                {
+                    "name": "Get Recipe By ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:5000/api/recipe/67597511592b96a7a456195f",
+                            "path": [
+                                "api",
+                                "recipe",
+                                "67597511592b96a7a456195f"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Recipe By Id",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:5000/api/recipe/67571c4e9111552aab7f85d2",
+                            "path": [
+                                "api",
+                                "recipe",
+                                "67571c4e9111552aab7f85d2"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                },
+                {
+                    "name": "Add Recipe",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:5000/api/recipe/addRecipe",
+                            "path": [
+                                "api",
+                                "recipe",
+                                "addRecipe"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"image\": \"https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png\",\n  \"videoUrl\": null,\n  \"title\": \"New Structure Test\",\n  \"ingredients\": \"New Structure Ingredients\",\n  \"details\": \"New Structure Details\",\n  \"notes\": \"New Structure Notes\",\n  \"directions\": \"New Structure Directions\",\n  \"under30min\": true,\n  \"tags\": [\n    \"Meat\",\n    \"Pasta\",\n    \"Italian\"\n  ],\n  \"ratings\": [\n    {\n      \"ratingValue\": 4\n    }\n  ]\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Recipes",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:5000/api/recipe/?page=6&limit=",
+                            "query": [
+                                {
+                                    "key": "page",
+                                    "value": "6"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": ""
+                                }
+                            ],
+                            "variable": [],
+                            "path": [
+                                "api",
+                                "recipe"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                },
+                {
+                    "name": "Edit By Id",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:5000/api/recipe/67571ccf40b90b2048a0c458",
+                            "path": [
+                                "api",
+                                "recipe",
+                                "67571ccf40b90b2048a0c458"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"title\": \"Test Recipe 6\",\n  \"ingredients\": \"Test Ingredients 6\",\n  \"instructions\": \"Test Instructions 6\",\n  \"category\": \"Test Category 6\",\n  \"tags\": [\n    \"Meat\",\n    \"Italian\",\n    \"Pasta\"\n  ]\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete All Recipes",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:5000/api/recipe/deleteAll",
+                            "path": [
+                                "api",
+                                "recipe",
+                                "deleteAll"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Comments",
+            "item": [
+                {
+                    "name": "Get All Comments By Recipe Id",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:5000/api/comments/67597511592b96a7a456195f",
+                            "path": [
+                                "api",
+                                "comments",
+                                "67597511592b96a7a456195f"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        }
+                    }
+                },
+                {
+                    "name": "Post Comment",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:5000/api/comments/67597511592b96a7a456195f",
+                            "path": [
+                                "api",
+                                "comments",
+                                "67597511592b96a7a456195f"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "5000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"content\": \"This Dish is so nice\"\n}"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -10,8 +10,9 @@ import RecipeFeed from "./pages/RecipeFeed";
 import NotFound from "./pages/NotFound";
 import DashBoard from "./pages/DashBoard";
 import Layout from "./layouts/Layout";
-import ProtectedRoute from "./Routes/ProtectedRoute";
 import Setting from "./pages/Setting";
+import ProtectedRoute from "./Routes/ProtectedRoute";
+import Auth from "./Routes/AuthenticatedRoute"
 
 const router = createBrowserRouter([
   {
@@ -19,15 +20,15 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: '/', element: <Welcome /> },
-      { path: '/signin', element: <Signin /> },
-      { path: '/signup', element: <Signup /> },
+      { path: '/signin', element: <Auth element={<Signin />} /> },
+      { path: '/signup', element: <Auth element={<Signup />} /> },
       { path: '/recipe', element: <RecipeFeed /> },
       { path: '/detail/:id', element: <DetailPage /> },
       { path: '/add-recipe', element: <ProtectedRoute element={<AddRecipe />} /> },
       { path: '/edit-recipe/:id', element: <ProtectedRoute element={<EditRecipe />} /> },
       { path: '/u/:username', element: <DashBoard /> },
       { path: "/settings", element: <ProtectedRoute element={<Setting />} /> },
-      { path: '*', element: <NotFound /> }, // Updated from '/*' to '*'
+      { path: '*', element: <NotFound /> },
     ]
   }
 ]);
